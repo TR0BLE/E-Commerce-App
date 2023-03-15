@@ -7,7 +7,8 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 const notFoundMiddleware = require('./middleware/not-found');
-const errorHandlerMiddleware = require('./middleware/error-handler')
+const errorHandlerMiddleware = require('./middleware/error-handler');
+const authRoute = require('./routes/authRoutes');
 
 app.use(morgan('tiny'))
 app.use(express.json())
@@ -15,6 +16,7 @@ app.use(express.json())
 app.get('/', (req, res) => {
     return res.json({ App: "E-Commerce" })
 })
+app.use('/api/v1/auth', authRoute);
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 
